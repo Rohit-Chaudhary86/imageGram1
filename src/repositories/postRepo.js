@@ -6,7 +6,7 @@ export const createPost=async(caption,image,url)=>{  //create post
         return newpost;
     } catch (error) {
         console.log(error);
-        
+            
     }
 };
 
@@ -15,6 +15,7 @@ export const findAll=async()=>{  //find all posts
         const find=await post.find();
         return find;
     } catch (error) {
+        console.log(error);
         
     }
 }

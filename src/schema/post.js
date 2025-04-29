@@ -4,7 +4,8 @@ const postSchema=new mongoose.Schema({
         type:String,
         require:true,
         minLength:5,
-    },image:{
+    },
+    image:{
         type:String,
         require:true
     },
