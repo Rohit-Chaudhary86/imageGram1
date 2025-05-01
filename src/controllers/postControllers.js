@@ -1,4 +1,14 @@
-export async function createPost(req,res){
+import { createPostService } from "../services/postService.js"
 
-    return res.json({message:"post created succesfully"})
+
+export async function createPost(req,res){
+    const post=await createPostService({
+        caption:req.body.caption,
+        image:req.file.location
+    })
+    return res.status(201).json({
+        success:true,
+        message:"post created succesfully",
+        data:post
+    })
 }

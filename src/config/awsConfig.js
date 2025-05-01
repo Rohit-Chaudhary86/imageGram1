@@ -1,9 +1,9 @@
-import AWS from "aws-sdk"
-import serverConfig from "./serverConfig"
+import AWS from "aws-sdk";
+import {AWS_ACCESSKEY, AWS_SECRETACCESSKEY, AWS_REGION} from "./serverConfig.js";
 
-const s3=new AWS.S3({
-    region:serverConfig.AWS_REGION,
-    accessKeyId:serverConfig.AWS_ACCESSKEY,
-    secretAccessKey:serverConfig.AWS_SECRETACCESSKEY
+export const s3 = new AWS.S3({
+    region: AWS_REGION,
+    accessKeyId: AWS_ACCESSKEY,
+    secretAccessKey: AWS_SECRETACCESSKEY
 });
-export default s3;
+
