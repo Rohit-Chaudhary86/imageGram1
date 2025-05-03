@@ -10,13 +10,22 @@ export const createPost=async(caption,image,url)=>{  //create post
     }
 };
 
-export const findAll=async()=>{  //find all posts
+export const findAllPosts=async(offset,limit)=>{  //find all posts
     try {
-        const find=await post.find();
+        const find=await post.find().sort({createdAt:-1}).skip(offset).limit(limit);  //createdAt:-1 show our posts in descending order
         return find;
     } catch (error) {
         console.log(error);
         
+    }
+}
+
+export const countAllPosts=async()=>{
+    try {
+        const count=await post.countDocuments();
+        return count;
+    } catch (error) {
+        console.log(error);
     }
 }
 

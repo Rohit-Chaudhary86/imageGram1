@@ -1,4 +1,4 @@
-import {createPost as createPostRepository} from "../repositories/postRepo.js"
+import {countAllPosts, createPost as createPostRepository,findAllPosts} from "../repositories/postRepo.js"
 
 export const createPostService=async (createPostObject)=>{
     //1 take the image on post and upload on aws
@@ -11,4 +11,15 @@ export const createPostService=async (createPostObject)=>{
 
     const post=await createPostRepository(caption,image);
     return post;
+}
+
+export const getAllPostsService=async(offset,limit)=>{
+  const posts=await findAllPosts(offset,limit);
+  const totalDocuments=await countAllPosts();
+
+  const totalPages=Math.ceil(totalDocuments/limit);
+
+  return{
+    posts,totalPages,totalDocuments
+  } 
 }
