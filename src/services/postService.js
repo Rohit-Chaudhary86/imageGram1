@@ -1,4 +1,4 @@
-import {countAllPosts, createPost as createPostRepository,findAllPosts} from "../repositories/postRepo.js"
+import {countAllPosts, createPost as createPostRepository,deletePostsById,findAllPosts, updatePostById} from "../repositories/postRepo.js"
 
 export const createPostService=async (createPostObject)=>{
     //1 take the image on post and upload on aws
@@ -22,4 +22,15 @@ export const getAllPostsService=async(offset,limit)=>{
   return{
     posts,totalPages,totalDocuments
   } 
+}
+
+export const deletePostService=async(id)=>{
+   //call the repo function
+   const response=await deletePostsById(id);
+   return response;
+}
+
+export const updatePostService= async(id,updateObject)=>{
+  const response=await updatePostById(id,updateObject);
+  return response;
 }

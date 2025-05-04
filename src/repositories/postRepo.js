@@ -1,4 +1,5 @@
-import post from "../schema/post.js"
+import post from "../schema/post.js";
+
 
 export const createPost=async(caption,image,url)=>{  //create post
     try {
@@ -38,11 +39,20 @@ export const findPostById =async(id)=>{    //find post related to id
     }
 }
 
-export const deleteById =async(id)=>{    //delete post related to id
+export const deletePostsById =async(id)=>{    //delete post related to id
     try {
-        const findPostByide= await post.findByIdAndDelete(id);
-        return findPostByide;
+        const findPostByid= await post.findByIdAndDelete(id);
+        return findPostByid;
     } catch (error) {
         console.log(error);
+    }
+}
+
+export const updatePostById=async(id,updateObject)=>{
+    try {
+        const updatePost = await post.findByIdAndUpdate(id,updateObject,{new:true});
+        return updatePost;                         //{new:true} returns us updated document
+    } catch (error) {
+        console.log(error)
     }
 }
