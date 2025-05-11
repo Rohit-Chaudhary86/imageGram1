@@ -9,7 +9,15 @@ export const s3uploader=multer({
         bucket:AWS_BUCKET_NAME,
            //below logic left to  understand of how to upload file to s3
         key:function(req,file,cb){
-         console.log(file); 
+        if(!file){
+            return cb(new Error("file not found"));
+        }
+         //check mimetype for jpeg and png files only
+if (file.mimetype !='image/jpeg' && file.mimetype !='image/png') {
+    return cb(new Error("file type not supported"))
+}
+         console.log(file);
+        
          const uniqueSuffix=Date.now()+"-"+Math.round(Math.random()* 1e9)
 
          cb(null,file.fieldname+"-"+uniqueSuffix+"."+file.mimetype.split("/")[1])
