@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+
 const userSchema=new mongoose.Schema({
     userName:{
         type:String,
@@ -8,7 +10,7 @@ const userSchema=new mongoose.Schema({
     },
     email:{
         type:String,
-        require:true,
+        required:true,
         minLength:7,
         unique:true,
         validate:{
@@ -19,8 +21,8 @@ const userSchema=new mongoose.Schema({
         }
     },
     password:{
-        type:Number,
-        require:true,
+        type:String,
+        required:true,
         unique:true,
         minLength:8,
         validate:{
@@ -31,5 +33,19 @@ const userSchema=new mongoose.Schema({
         }
     }
 },{timestamps:true});  //timestamp which give update about time at which changes occur
-const user=mongoose.model("user",userSchema);
-export default user;
+
+userSchema.pre('save',function modifyPass(next){
+   //incoming user object 
+   const user=this;
+   const SALT=bcrypt.genSaltSync(9); //higher the salt value stronger the hash
+   //hash pass
+   const hashedPassword=bcrypt.hashSync(user.password , SALT);
+
+   //replace plain pass with hash pass
+   user.password=hashedPassword;
+   next();
+})  
+    
+
+const User=mongoose.model("user",userSchema);
+export default User;
