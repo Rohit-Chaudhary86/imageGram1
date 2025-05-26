@@ -2,6 +2,8 @@ import express from "express";
 import connectDB from "./config/dbConfig.js";
 import apiRouter from "./router/apiRouter.js"
 import multer from "multer"
+import dotenv from 'dotenv';
+dotenv.config();
 
 //Use npm start to run project
 const PORT=3000;
