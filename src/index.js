@@ -4,10 +4,17 @@ import apiRouter from "./router/apiRouter.js"
 import multer from "multer"
 import dotenv from 'dotenv';
 import { isAuthenticated } from "./middlewares/authMiddleware.js";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+import {operations} from "./utils/swaggerOptions.js"
+
 dotenv.config();
 
 //Use npm start to run project
 const PORT=3000;
+
+
+
 
 const app=express();  
 
@@ -18,9 +25,11 @@ app.use(express.json()); //app.use allows if any req comes it will go throw expr
 app.use(express.text()); // this allow to understand text
 app.use(express.urlencoded());
 
+const swaggerDocs = swaggerJSDoc(operations);  
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs)); 
 
+app.use("/api",apiRouter)  //changed
 
-app.use("/api",apiRouter)
 
 app.get("/ping",isAuthenticated,(req,res)=>{
     console.log(req.body)
