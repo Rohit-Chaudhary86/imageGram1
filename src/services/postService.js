@@ -1,4 +1,4 @@
-import {countAllPosts, createPost as createPostRepository,deletePostsById,findAllPosts, updatePostById} from "../repositories/postRepo.js"
+import {countAllPosts, createPost as createPostRepository,deletePostsById,findAllPosts, findPostById, updatePostById} from "../repositories/postRepo.js"
 
 export const createPostService=async (createPostObject)=>{
     //1 take the image on post and upload on aws
@@ -24,8 +24,15 @@ export const getAllPostsService=async(offset,limit)=>{
   } 
 }
 
-export const deletePostService=async(id)=>{
+export const deletePostService=async(id,user)=>{
    //call the repo function
+   const post= await findPostById(id)
+   if(post.user !=user){
+    throw{
+      status:401,
+      message:"unauthorized"
+    }
+   }
    const response=await deletePostsById(id);
    return response;
 }

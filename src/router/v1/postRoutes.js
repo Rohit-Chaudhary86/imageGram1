@@ -11,6 +11,6 @@ const router=express.Router(); //router object
 
 router.post("/",isAuthenticated,s3uploader,validate(zodPostSchema),createPost)
 router.get("/",getAllPosts);
-router.delete("/:id",deletePost);
+router.delete("/:id",isAuthenticated,deletePost);
 router.put("/:id",s3uploader,updatePost)
 export default router;
