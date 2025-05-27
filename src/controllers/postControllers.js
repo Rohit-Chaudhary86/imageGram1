@@ -2,7 +2,8 @@ import { createPostService, deletePostService, getAllPostsService, updatePostSer
 
 
 export async function createPost(req,res){
-    console.log(req.file);
+    const userDetails=req.user;
+   
     if(!req.file || !req.file.location){
        return res.status(400).json({
         status:false,
@@ -13,7 +14,8 @@ export async function createPost(req,res){
 
     const post=await createPostService({
         caption:req.body.caption,
-        image:req.file.location
+        image:req.file.location,
+        user:userDetails._id
     })
     return res.status(201).json({
         success:true,

@@ -7,9 +7,9 @@ export const createPostService=async (createPostObject)=>{
     //4 return the post object 
     const caption =createPostObject.caption?.trim();
     const image=createPostObject.image;
-      //const user=createPostObject.user; --> add later
+    const user=createPostObject.user; 
 
-    const post=await createPostRepository(caption,image);
+    const post=await createPostRepository(caption,image,user);
     return post;
 }
 

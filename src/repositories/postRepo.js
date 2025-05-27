@@ -1,9 +1,9 @@
 import post from "../schema/post.js";
 
 
-export const createPost=async(caption,image,url)=>{  //create post
+export const createPost=async(caption,image,user)=>{  //create post
     try {
-        const newpost=await post.create({caption,image,url});
+        const newpost=await post.create({caption,image,user});
         return newpost;
     } catch (error) {
         console.log(error);
