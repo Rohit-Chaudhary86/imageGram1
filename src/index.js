@@ -3,6 +3,7 @@ import connectDB from "./config/dbConfig.js";
 import apiRouter from "./router/apiRouter.js"
 import multer from "multer"
 import dotenv from 'dotenv';
+import { isAuthenticated } from "./middlewares/authMiddleware.js";
 dotenv.config();
 
 //Use npm start to run project
@@ -21,12 +22,16 @@ app.use(express.urlencoded());
 
 app.use("/api",apiRouter)
 
+app.get("/ping",isAuthenticated,(req,res)=>{
+    console.log(req.body)
+    console.log(req.query)
+    console.log(req.user)
+    return res.json({message:"pong"})
+})
+
 app.get("/",(req,res)=>{
     return res.send("hello world");
 });
-
-
-
 
 app.listen(PORT,()=>{
     console.log(`server is running on port: ${PORT}`);

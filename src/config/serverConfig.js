@@ -6,3 +6,4 @@ dotenv.config();
  export const AWS_SECRETACCESSKEY=process.env.AWS_SECRETACCESSKEY; //for exporting secret access key
  export const AWS_REGION=process.env.AWS_REGION;  //for exporting AWS Region
  export const AWS_BUCKET_NAME=process.env.AWS_BUCKET_NAME;  //exports bucket name
+export const JWT_SECRET=process.env.JWT_SECRET;
