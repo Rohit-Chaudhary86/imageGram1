@@ -37,7 +37,7 @@ export const signinUserService=async(userDetails)=>{
                 message:"invalid password"
             }
         }
-        const token=genrateJwtToken({email: user.email, _id:user._id, username:user.username})
+        const token=genrateJwtToken({email: user.email, _id:user._id, username:user.userName,role:user.role || 'user'})
         return token;
     } catch (error) {
         throw error;
