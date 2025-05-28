@@ -31,7 +31,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use("/api",apiRouter)  //changed
 
 
-app.get("/ping",isAuthenticated,(req,res)=>{
+app.get("/ping",(req,res)=>{
     console.log(req.body)
     console.log(req.query)
     console.log(req.user)
